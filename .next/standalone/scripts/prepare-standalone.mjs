@@ -7,7 +7,10 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
-const standaloneDir = path.join(root, ".next", "standalone");
+const nestedStandaloneDir = path.join(root, ".next", "standalone");
+const standaloneDir = fs.existsSync(path.join(root, "server.js"))
+  ? root
+  : nestedStandaloneDir;
 const staticDir = path.join(root, ".next", "static");
 const publicDir = path.join(root, "public");
 
@@ -35,5 +38,16 @@ if (!fs.existsSync(standaloneDir)) {
 
 copyRecursive(publicDir, path.join(standaloneDir, "public"));
 copyRecursive(staticDir, path.join(standaloneDir, ".next", "static"));
+
+const serverJs = path.join(standaloneDir, "server.js");
+if (fs.existsSync(serverJs)) {
+  const marker = "require('./scripts/load-env.cjs')";
+  let source = fs.readFileSync(serverJs, "utf8");
+  if (!source.includes(marker)) {
+    source = `${marker}\n\n${source}`;
+    fs.writeFileSync(serverJs, source);
+    console.log("Injected env loader into standalone server.js");
+  }
+}
 
 console.log("Standalone bundle prepared:", standaloneDir);

@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "functions": {
+    "/api/checkout": {
+      "maxDuration": 60
+    },
+    "/api/wavy/checkout": {
+      "maxDuration": 60
+    },
+    "/api/webhooks/wavy": {},
+    "/WEBHOOKS/WAVY": {}
+  }
+}

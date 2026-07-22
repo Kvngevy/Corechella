@@ -1,0 +1,322 @@
+{
+  "users": [
+    {
+      "id": "user-super-admin",
+      "name": "Super Admin",
+      "email": "admin@corechella.com",
+      "passwordHash": "$2b$12$txrIAjgsNARB34I6SGLdC.Wuz6xcD8ooDa4BP3kMhzCD.lb1Z5Oli",
+      "role": "super_admin",
+      "permissions": [
+        "manage_orders",
+        "manage_attendees",
+        "check_in",
+        "manage_promos",
+        "manage_events"
+      ],
+      "status": "active",
+      "createdAt": "2026-06-13T04:59:24.404Z"
+    }
+  ],
+  "tickets": [
+    {
+      "id": "eb",
+      "name": "Early Bird",
+      "price": 0,
+      "description": "Free limited early access — 300 tickets only",
+      "total": 300,
+      "remaining": 299,
+      "sold": 1
+    },
+    {
+      "id": "reg",
+      "name": "Regular Ticket",
+      "price": 3000,
+      "description": "General admission",
+      "total": 2760,
+      "remaining": 2398,
+      "sold": 362
+    },
+    {
+      "id": "vip",
+      "name": "VIP",
+      "price": 25000,
+      "description": "Premium viewing, lounge & fast entry",
+      "total": 230,
+      "remaining": 200,
+      "sold": 30
+    }
+  ],
+  "promos": [
+    {
+      "id": "p1",
+      "code": "CORE10",
+      "type": "percent",
+      "value": 10,
+      "maxUses": 500,
+      "uses": 0,
+      "status": "active"
+    },
+    {
+      "id": "p2",
+      "code": "EARLYBIRD",
+      "type": "fixed",
+      "value": 5000,
+      "maxUses": 100,
+      "uses": 0,
+      "status": "active"
+    },
+    {
+      "id": "p3",
+      "code": "VIP2025",
+      "type": "percent",
+      "value": 15,
+      "maxUses": 500,
+      "uses": 500,
+      "status": "expired"
+    }
+  ],
+  "orders": [
+    {
+      "id": "CC4-000003",
+      "customerName": "KARL AYO",
+      "customerEmail": "karlayo@gmail.com",
+      "customerPhone": "08030265564",
+      "event": "Corechella 2026",
+      "items": [
+        {
+          "ticketId": "eb",
+          "ticketName": "Early Bird",
+          "price": 12000,
+          "quantity": 1
+        }
+      ],
+      "subtotal": 12000,
+      "fee": 1600,
+      "discount": 0,
+      "total": 13600,
+      "status": "completed",
+      "paymentMethod": "wavy",
+      "createdAt": "2026-06-13T10:07:35.316Z"
+    },
+    {
+      "id": "CC-2026-000002",
+      "customerName": "AMARA OKAFOR",
+      "customerEmail": "amara2@okafor.com",
+      "customerPhone": "09030264464",
+      "event": "Corechella 2026",
+      "items": [
+        {
+          "ticketId": "eb",
+          "ticketName": "Early Bird",
+          "price": 12000,
+          "quantity": 1
+        }
+      ],
+      "subtotal": 12000,
+      "fee": 1600,
+      "discount": 0,
+      "total": 13600,
+      "status": "completed",
+      "paymentMethod": "wavy",
+      "createdAt": "2026-06-13T08:52:26.620Z"
+    },
+    {
+      "id": "CC-2026-000001",
+      "customerName": "AMARA OKAFOR",
+      "customerEmail": "dayo@gmail.com",
+      "customerPhone": "09030264464",
+      "event": "Corechella 2026",
+      "items": [
+        {
+          "ticketId": "eb",
+          "ticketName": "Early Bird",
+          "price": 12000,
+          "quantity": 1
+        }
+      ],
+      "subtotal": 12000,
+      "fee": 1600,
+      "discount": 0,
+      "total": 13600,
+      "status": "completed",
+      "paymentMethod": "wavy",
+      "createdAt": "2026-06-13T08:07:47.379Z"
+    },
+    {
+      "id": "CC4-000004",
+      "customerName": "Aaliyyah Akinbile",
+      "customerEmail": "aliyahayobami7@gmail.com",
+      "customerPhone": "09017224041",
+      "event": "Corechella 2026",
+      "items": [
+        {
+          "ticketId": "reg",
+          "ticketName": "Regular Ticket",
+          "price": 3000,
+          "quantity": 1
+        }
+      ],
+      "subtotal": 3000,
+      "fee": 0,
+      "discount": 0,
+      "total": 3000,
+      "status": "completed",
+      "paymentMethod": "wavy",
+      "createdAt": "2026-07-22T07:15:18.163Z"
+    },
+    {
+      "id": "CC4-000005",
+      "customerName": "Aaliyyah Akinbile",
+      "customerEmail": "aliyahayobami7@gmail.com",
+      "customerPhone": "09017224041",
+      "event": "Corechella 2026",
+      "items": [
+        {
+          "ticketId": "reg",
+          "ticketName": "Regular Ticket",
+          "price": 3000,
+          "quantity": 1
+        }
+      ],
+      "subtotal": 3000,
+      "fee": 0,
+      "discount": 0,
+      "total": 3000,
+      "status": "completed",
+      "paymentMethod": "wavy",
+      "createdAt": "2026-07-22T07:16:08.653Z"
+    },
+    {
+      "id": "CC4-000006",
+      "customerName": "Jairz Man",
+      "customerEmail": "moonmanning01@gmail.com",
+      "customerPhone": "09113634279",
+      "event": "Corechella 2026",
+      "items": [
+        {
+          "ticketId": "eb",
+          "ticketName": "Early Bird",
+          "price": 0,
+          "quantity": 1
+        }
+      ],
+      "subtotal": 0,
+      "fee": 0,
+      "discount": 0,
+      "total": 0,
+      "status": "completed",
+      "paymentMethod": "wavy",
+      "createdAt": "2026-07-22T07:16:37.472Z"
+    }
+  ],
+  "attendees": [
+    {
+      "id": "att-CC4-000003-01",
+      "orderId": "CC4-000003",
+      "ticketIndex": 1,
+      "ticketCode": "CC4-000003-01",
+      "name": "KARL AYO",
+      "email": "karlayo@gmail.com",
+      "phone": "08030265564",
+      "ticketType": "Early Bird",
+      "amount": 12000,
+      "status": "not-checked-in",
+      "qrCode": "CC|CC4-000003|T01|E18C917D",
+      "date": "2026-06-13"
+    },
+    {
+      "id": "att-CC-2026-000002-01",
+      "orderId": "CC-2026-000002",
+      "name": "AMARA OKAFOR",
+      "email": "amara2@okafor.com",
+      "phone": "09030264464",
+      "ticketType": "Early Bird",
+      "amount": 12000,
+      "status": "not-checked-in",
+      "qrCode": "CC|CC-2026-000002|T01|73AC70F9",
+      "date": "2026-06-13"
+    },
+    {
+      "id": "att-CC-2026-000001-01",
+      "orderId": "CC-2026-000001",
+      "name": "AMARA OKAFOR",
+      "email": "dayo@gmail.com",
+      "phone": "09030264464",
+      "ticketType": "Early Bird",
+      "amount": 12000,
+      "status": "not-checked-in",
+      "qrCode": "CC|CC-2026-000001|T01|CEC16F88",
+      "date": "2026-06-13"
+    },
+    {
+      "id": "att-CC4-000004-01",
+      "orderId": "CC4-000004",
+      "ticketIndex": 1,
+      "ticketCode": "CC4-000004-01",
+      "ticketUuid": "e01c1ecd-8569-423b-a2b8-c7ff46cd9c8b",
+      "name": "Aaliyyah Akinbile",
+      "email": "aliyahayobami7@gmail.com",
+      "phone": "09017224041",
+      "ticketType": "Regular Ticket",
+      "ticketTypeId": "reg",
+      "amount": 3000,
+      "status": "not-checked-in",
+      "deviceFingerprint": "fp-5sq0nu",
+      "qrCode": "CC4-000004-01.7B821D0C",
+      "qrExpiresAt": "2027-07-22T07:15:18.164Z",
+      "date": "2026-07-22"
+    },
+    {
+      "id": "att-CC4-000005-01",
+      "orderId": "CC4-000005",
+      "ticketIndex": 1,
+      "ticketCode": "CC4-000005-01",
+      "ticketUuid": "4118c96a-9569-4836-857d-6acbc35cb23b",
+      "name": "Aaliyyah Akinbile",
+      "email": "aliyahayobami7@gmail.com",
+      "phone": "09017224041",
+      "ticketType": "Regular Ticket",
+      "ticketTypeId": "reg",
+      "amount": 3000,
+      "status": "not-checked-in",
+      "deviceFingerprint": "fp-5sq0nu",
+      "qrCode": "CC4-000005-01.1EA3F155",
+      "qrExpiresAt": "2027-07-22T07:16:08.653Z",
+      "date": "2026-07-22"
+    },
+    {
+      "id": "att-CC4-000006-01",
+      "orderId": "CC4-000006",
+      "ticketIndex": 1,
+      "ticketCode": "CC4-000006-01",
+      "ticketUuid": "353584ef-9bb7-47f2-bf86-bc296306901d",
+      "name": "Jairz Man",
+      "email": "moonmanning01@gmail.com",
+      "phone": "09113634279",
+      "ticketType": "Early Bird",
+      "ticketTypeId": "eb",
+      "amount": 0,
+      "status": "not-checked-in",
+      "deviceFingerprint": "fp-yfo6i3",
+      "qrCode": "CC4-000006-01.7CCEB279",
+      "qrExpiresAt": "2027-07-22T07:16:37.472Z",
+      "date": "2026-07-22"
+    }
+  ],
+  "nextOrderSequence": 7,
+  "earlyBirdIssued": 1,
+  "earlyBirdRemaining": 299,
+  "earlyBirdClaims": [
+    {
+      "email": "moonmanning01@gmail.com",
+      "phone": "9113634279",
+      "deviceFingerprint": "fp-yfo6i3",
+      "orderId": "CC4-000006",
+      "at": "2026-07-22T07:16:37.473Z"
+    }
+  ],
+  "tableReservationCalls": 0,
+  "scanLogs": [],
+  "ipAttempts": [],
+  "abuseFlags": []
+}
