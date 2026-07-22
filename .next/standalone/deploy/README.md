@@ -94,5 +94,9 @@ If RAM spikes during builds, run `npm run build` **off-peak** or on CI, then rsy
 
 ```bash
 npm run build:production
-NODE_ENV=production PORT=3002 node .next/standalone/server.js
+NODE_ENV=production PORT=3002 node server.js
 ```
+
+PM2 auto-detects the correct `server.js` from:
+1. `/var/www/corechella/server.js` (preferred after rsync)
+2. `/var/www/corechella/.next/standalone/server.js` (legacy layout)

@@ -148,25 +148,20 @@ export async function checkWavyGatewayHealth(): Promise<{ ok: boolean; status?: 
     const res = await fetchWithTimeout(
       `${WAVY_API_BASE}${WAVY_CHECKOUT_PATH}`,
       {
-        method: "POST",
+        method: "GET",
         headers: {
           Authorization: `Bearer ${getWavySecretKey()}`,
-          "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          amount: WAVY_MIN_AMOUNT_NGN,
-          currency: "NGN",
-          description: "Corechella health check",
-          email: "healthcheck@corechella.com",
-          merchant_reference: "HEALTHCHECK",
-          success_url: `${getAppUrl()}/tickets`,
-          cancel_url: `${getAppUrl()}/tickets`,
-        }),
       },
       8000
     );
 
-    return { ok: res.ok, status: res.status };
+    // Gateway is reachable when it responds (even 404/405 on GET).
+    if (res.status === 502 || res.status === 503 || res.status === 504) {
+      return { ok: false, status: res.status };
+    }
+
+    return { ok: true, status: res.status };
   } catch {
     return { ok: false };
   }

@@ -23,14 +23,14 @@ server {
     }
 
     location /_next/static/ {
-        alias /var/www/corechella/.next/standalone/.next/static/;
+        alias /var/www/corechella/.next/static/;
         access_log off;
         expires 365d;
         add_header Cache-Control "public, immutable";
     }
 
     location /images/ {
-        alias /var/www/corechella/.next/standalone/public/images/;
+        alias /var/www/corechella/public/images/;
         access_log off;
         expires 30d;
         add_header Cache-Control "public";
@@ -44,6 +44,8 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_set_header Connection "";
+        proxy_connect_timeout 10s;
+        proxy_read_timeout 60s;
     }
 }
 NGINX
@@ -56,10 +58,10 @@ cd "${APP_ROOT}"
 export CORECHELLA_ROOT="${APP_ROOT}"
 
 if pm2 describe corechella >/dev/null 2>&1; then
-  pm2 reload "${APP_ROOT}/deploy/ecosystem.config.cjs" --env production --update-env
-else
-  pm2 start "${APP_ROOT}/deploy/ecosystem.config.cjs" --env production
+  pm2 delete corechella || true
 fi
+
+pm2 start "${APP_ROOT}/deploy/ecosystem.config.cjs" --env production
 pm2 save
 
 echo "Corechella running on port 3002."

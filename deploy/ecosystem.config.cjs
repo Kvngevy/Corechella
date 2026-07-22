@@ -30,25 +30,42 @@ function loadEnvFile(filePath) {
   return vars;
 }
 
+function resolveServerEntry(appRoot) {
+  const candidates = [
+    path.join(appRoot, "server.js"),
+    path.join(appRoot, ".next", "standalone", "server.js"),
+    path.join(appRoot, ".next", "standalone", ".next", "standalone", "server.js"),
+  ];
+
+  for (const entry of candidates) {
+    if (fs.existsSync(entry)) {
+      return { cwd: path.dirname(entry), script: path.basename(entry) };
+    }
+  }
+
+  return { cwd: appRoot, script: "server.js" };
+}
+
 const appRoot = process.env.CORECHELLA_ROOT || "/var/www/corechella";
 const fileEnv = loadEnvFile(path.join(appRoot, ".env.production.local"));
+const server = resolveServerEntry(appRoot);
 
 module.exports = {
   apps: [
     {
       name: "corechella",
-      cwd: appRoot,
-      script: ".next/standalone/server.js",
+      cwd: server.cwd,
+      script: server.script,
       instances: 1,
       exec_mode: "fork",
       autorestart: true,
       watch: false,
-      max_restarts: 10,
+      max_restarts: 15,
       min_uptime: "10s",
       kill_timeout: 5000,
-      listen_timeout: 10000,
-      max_memory_restart: "380M",
-      node_args: "--max-old-space-size=320 --optimize-for-size",
+      listen_timeout: 15000,
+      max_memory_restart: "450M",
+      node_args: "--max-old-space-size=384",
       env_production: {
         NODE_ENV: "production",
         PORT: "3002",
@@ -57,6 +74,7 @@ module.exports = {
         DB_READ_CACHE_MS: "3000",
         MONGODB_MAX_POOL_SIZE: "3",
         NEXT_PUBLIC_APP_URL: "https://corechella.com",
+        CORECHELLA_ROOT: appRoot,
         ...fileEnv,
       },
       error_file: "/var/log/corechella/error.log",

@@ -7,7 +7,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
-const standaloneDir = path.join(root, ".next", "standalone");
+const nestedStandaloneDir = path.join(root, ".next", "standalone");
 const staticDir = path.join(root, ".next", "static");
 const publicDir = path.join(root, "public");
 
@@ -28,12 +28,19 @@ function copyRecursive(src, dest) {
   }
 }
 
-if (!fs.existsSync(standaloneDir)) {
+if (!fs.existsSync(nestedStandaloneDir)) {
   console.error("Run `npm run build` first — .next/standalone not found.");
   process.exit(1);
 }
 
-copyRecursive(publicDir, path.join(standaloneDir, "public"));
-copyRecursive(staticDir, path.join(standaloneDir, ".next", "static"));
+copyRecursive(publicDir, path.join(nestedStandaloneDir, "public"));
+copyRecursive(staticDir, path.join(nestedStandaloneDir, ".next", "static"));
 
-console.log("Standalone bundle prepared:", standaloneDir);
+// Keep a top-level server.js in sync with the freshly built bundle.
+const nestedServer = path.join(nestedStandaloneDir, "server.js");
+const rootServer = path.join(root, "server.js");
+if (fs.existsSync(nestedServer)) {
+  fs.copyFileSync(nestedServer, rootServer);
+}
+
+console.log("Standalone bundle prepared:", nestedStandaloneDir);
