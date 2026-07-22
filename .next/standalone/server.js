@@ -1,3 +1,5 @@
+require('./scripts/load-env.cjs')
+
 const path = require('path')
 
 const dir = path.join(__dirname)

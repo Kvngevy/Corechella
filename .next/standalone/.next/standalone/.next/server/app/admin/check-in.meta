@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/admin/layout,_N_T_/admin/check-in/layout,_N_T_/admin/check-in/page,_N_T_/admin/check-in"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/admin/check-in/__PAGE__",
+    "/admin/check-in",
+    "/admin",
+    "/_index",
+    "/_head"
+  ]
+}

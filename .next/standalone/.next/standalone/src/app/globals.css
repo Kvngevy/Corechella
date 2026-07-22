@@ -1,0 +1,289 @@
+@import "tailwindcss";
+
+:root {
+  --primary-purple: #7b2ff7;
+  --electric-cyan: #00f0ff;
+  --electric-magenta: #ff0080;
+  --electric-violet: #b026ff;
+  --deep-purple: #12082a;
+  --gold: #d4af37;
+  --gold-bright: #f5c842;
+  --black: #000000;
+  --rave-card: #1a1a1a;
+  --surface: #0a0520;
+  --surface-elevated: #110830;
+  --border: rgba(123, 47, 247, 0.25);
+  --text-primary: #ffffff;
+  --text-secondary: #9ca3af;
+  --background: var(--black);
+  --foreground: var(--text-primary);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary-purple);
+  --color-electric: var(--electric-cyan);
+  --color-magenta: var(--electric-magenta);
+  --color-violet: var(--electric-violet);
+  --color-deep-purple: var(--deep-purple);
+  --color-gold: var(--gold);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-border: var(--border);
+  --color-muted: var(--text-secondary);
+  --font-heading: "Cormorant Garamond", serif;
+  --font-body: "Montserrat", sans-serif;
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Cormorant Garamond", serif;
+}
+
+body, p, button, input, textarea, a {
+  font-family: "Montserrat", sans-serif;
+}
+
+.font-heading {
+  font-family: "Cormorant Garamond", serif;
+}
+
+.font-body {
+  font-family: "Montserrat", sans-serif;
+}
+
+/* ── Legacy electric utilities (inner pages) ── */
+.glass { background: rgba(10, 5, 32, 0.75); backdrop-filter: blur(24px); border: 1px solid rgba(0, 240, 255, 0.12); }
+.glass-electric { background: linear-gradient(135deg, rgba(17, 8, 48, 0.9), rgba(10, 5, 32, 0.85)); backdrop-filter: blur(20px); border: 1px solid rgba(0, 240, 255, 0.15); }
+.text-gradient { background: linear-gradient(135deg, #fff, var(--electric-cyan), var(--electric-magenta)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.text-electric { background: linear-gradient(90deg, var(--electric-cyan), var(--electric-violet)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-gradient { background: linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.92)); }
+.hero-electric-overlay { background: linear-gradient(135deg, rgba(123,47,247,0.25), transparent 50%), linear-gradient(180deg, transparent, rgba(0,0,0,0.9)); }
+.electric-glow { box-shadow: 0 0 20px rgba(123,47,247,0.5); }
+.electric-glow-sm { box-shadow: 0 0 16px rgba(123,47,247,0.4); }
+.electric-border { border: 1px solid transparent; background: linear-gradient(var(--surface), var(--surface)) padding-box, linear-gradient(135deg, var(--electric-cyan), var(--electric-violet)) border-box; }
+.electric-card { background: linear-gradient(160deg, rgba(17,8,48,0.95), rgba(10,5,32,0.98)); border: 1px solid rgba(0,240,255,0.1); transition: all 0.35s ease; }
+.electric-card:hover { border-color: rgba(176,38,255,0.45); transform: translateY(-2px); }
+.btn-electric { background: linear-gradient(135deg, var(--primary-purple), var(--electric-violet)); color: #fff; }
+.electric-grid { background-image: linear-gradient(rgba(123,47,247,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(123,47,247,0.04) 1px, transparent 1px); background-size: 48px 48px; }
+.section-glow::before { content: ""; position: absolute; inset: 50% auto auto 50%; width: 600px; height: 300px; transform: translate(-50%,-50%); background: radial-gradient(ellipse, rgba(123,47,247,0.12), transparent 70%); pointer-events: none; }
+.purple-glow { box-shadow: 0 0 24px rgba(123,47,247,0.5); }
+
+/* ── Rave landing (design mockup) ── */
+
+.rave-page {
+  background: #000;
+  color: #fff;
+}
+
+.rave-section {
+  @apply relative py-16 md:py-20 lg:py-24;
+}
+
+.rave-eyebrow {
+  font-family: "Montserrat", sans-serif;
+  @apply text-[10px] font-bold uppercase tracking-[0.35em] text-gold sm:text-xs;
+}
+
+.rave-heading {
+  font-family: "Cormorant Garamond", serif;
+  @apply text-3xl font-bold uppercase leading-tight tracking-wide text-white sm:text-4xl lg:text-5xl;
+}
+
+.rave-subheading {
+  font-family: "Montserrat", sans-serif;
+  @apply text-[10px] font-bold uppercase tracking-[0.35em] text-gold sm:text-xs;
+}
+
+.rave-card {
+  background: var(--rave-card);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  @apply rounded-xl;
+}
+
+.rave-card-purple {
+  background: var(--rave-card);
+  border: 1px solid rgba(123, 47, 247, 0.45);
+  @apply rounded-xl;
+}
+
+.rave-card-gold {
+  background: var(--rave-card);
+  border: 2px solid var(--gold);
+  box-shadow: 0 0 40px rgba(212, 175, 55, 0.2), inset 0 0 20px rgba(212, 175, 55, 0.03);
+  @apply rounded-xl;
+}
+
+.btn-gold {
+  font-family: "Montserrat", sans-serif;
+  background: linear-gradient(180deg, var(--gold-bright) 0%, var(--gold) 100%);
+  color: #000;
+  font-weight: 700;
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+  @apply rounded-md uppercase tracking-widest transition-all hover:brightness-110;
+}
+
+.btn-purple {
+  font-family: "Montserrat", sans-serif;
+  background: var(--primary-purple);
+  color: #fff;
+  font-weight: 700;
+  @apply rounded-md uppercase tracking-widest transition-all hover:brightness-110;
+}
+
+.btn-purple-outline {
+  font-family: "Montserrat", sans-serif;
+  border: 2px solid var(--primary-purple);
+  color: #fff;
+  background: rgba(123, 47, 247, 0.08);
+  @apply rounded-md uppercase tracking-widest transition-all hover:bg-primary/25;
+}
+
+.btn-outline-white {
+  font-family: "Montserrat", sans-serif;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  background: transparent;
+  @apply rounded-md uppercase tracking-widest transition-all hover:border-white/50;
+}
+
+.neon-icon-ring {
+  border: 1px solid rgba(123, 47, 247, 0.55);
+  box-shadow: 0 0 16px rgba(123, 47, 247, 0.2);
+}
+
+.hero-rave-overlay {
+  background:
+    radial-gradient(ellipse 85% 72% at 50% 42%, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.48) 44%, transparent 72%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.68) 0%, rgba(0, 0, 0, 0.32) 40%, rgba(0, 0, 0, 0.93) 100%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.58) 0%, transparent 20%, transparent 80%, rgba(0, 0, 0, 0.58) 100%);
+}
+
+.hero-content-panel {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-content-panel::before {
+  content: "";
+  position: absolute;
+  inset: -1.5rem -0.75rem;
+  z-index: -1;
+  border-radius: 1.5rem;
+  background: radial-gradient(ellipse 100% 100% at 50% 45%, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0.35) 55%, transparent 85%);
+  pointer-events: none;
+}
+
+.hero-title-shadow {
+  text-shadow:
+    0 0 48px rgba(0, 0, 0, 1),
+    0 4px 24px rgba(0, 0, 0, 0.95),
+    0 2px 6px rgba(0, 0, 0, 1);
+}
+
+.hero-text-shadow {
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.95), 0 1px 4px rgba(0, 0, 0, 1);
+}
+
+.hero-tagline-shadow {
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 1), 0 0 32px rgba(0, 0, 0, 0.85);
+}
+
+.tagline-script {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  color: var(--gold);
+  @apply text-xl sm:text-2xl md:text-3xl;
+}
+
+.hero-side-text {
+  font-family: "Montserrat", sans-serif;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  @apply text-[10px] font-bold uppercase tracking-[0.4em] text-white/25;
+}
+
+.timeline-line {
+  background: linear-gradient(90deg, transparent, var(--primary-purple), transparent);
+  @apply h-px w-full;
+}
+
+/* ── Nav glass bar ── */
+.nav-glass {
+  background: rgba(0, 0, 0, 0.62);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.nav-glass-scrolled {
+  background: rgba(0, 0, 0, 0.72);
+  border-color: rgba(212, 175, 55, 0.2);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.55),
+    0 0 24px rgba(123, 47, 247, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* ── Partners marquee ── */
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 40s linear infinite;
+  touch-action: pan-x;
+}
+
+.partner-marquee-item {
+  position: relative;
+}
+
+.partner-marquee-item::after {
+  content: "";
+  position: absolute;
+  bottom: 1.75rem;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.6), transparent);
+  transition: width 0.4s ease;
+}
+
+.partner-marquee-item:hover::after {
+  width: 100%;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #111; }
+::-webkit-scrollbar-thumb { background: var(--primary-purple); border-radius: 3px; }

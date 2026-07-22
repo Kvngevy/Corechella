@@ -53,6 +53,7 @@ module.exports = {
         NODE_ENV: "production",
         PORT: "3002",
         HOSTNAME: "127.0.0.1",
+        CORECHELLA_ROOT: appRoot,
         LOG_LEVEL: "warn",
         DB_READ_CACHE_MS: "3000",
         MONGODB_MAX_POOL_SIZE: "3",

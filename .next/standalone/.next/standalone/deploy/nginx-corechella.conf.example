@@ -1,0 +1,44 @@
+# Example nginx site — /etc/nginx/sites-available/corechella
+# Replace YOUR_DOMAIN and upstream port (3002) as needed.
+
+upstream corechella_app {
+    server 127.0.0.1:3002;
+    keepalive 8;
+}
+
+server {
+    listen 80;
+    server_name corechella.example.com;
+
+    client_max_body_size 4m;
+
+    gzip on;
+    gzip_types text/plain text/css application/json application/javascript image/svg+xml;
+    gzip_min_length 256;
+
+    location /_next/static/ {
+        alias /var/www/corechella/.next/standalone/.next/static/;
+        access_log off;
+        expires 365d;
+        add_header Cache-Control "public, immutable";
+    }
+
+    location /images/ {
+        alias /var/www/corechella/.next/standalone/public/images/;
+        access_log off;
+        expires 30d;
+        add_header Cache-Control "public";
+    }
+
+    location / {
+        proxy_pass http://corechella_app;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Connection "";
+        proxy_buffering on;
+        proxy_read_timeout 60s;
+    }
+}
