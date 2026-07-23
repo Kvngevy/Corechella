@@ -3,9 +3,23 @@ import { cookies } from "next/headers";
 import type { NextRequest } from "next/server";
 import type { AuthSession } from "./types";
 
-const JWT_SECRET = new TextEncoder().encode(
-  process.env.JWT_SECRET ?? "corechella-dev-secret-change-in-production"
-);
+let jwtSecretKey: Uint8Array | null = null;
+
+function getJwtSecretKey(): Uint8Array {
+  if (jwtSecretKey) return jwtSecretKey;
+
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    if (process.env.NODE_ENV === "production") {
+      throw new Error("JWT_SECRET must be set in production");
+    }
+    jwtSecretKey = new TextEncoder().encode("corechella-dev-secret-change-in-production");
+    return jwtSecretKey;
+  }
+
+  jwtSecretKey = new TextEncoder().encode(secret);
+  return jwtSecretKey;
+}
 export const COOKIE_NAME = "corechella_session";
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 
@@ -14,12 +28,12 @@ export async function createToken(session: AuthSession) {
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
     .setExpirationTime("7d")
-    .sign(JWT_SECRET);
+    .sign(getJwtSecretKey());
 }
 
 export async function verifyToken(token: string): Promise<AuthSession | null> {
   try {
-    const { payload } = await jwtVerify(token, JWT_SECRET);
+    const { payload } = await jwtVerify(token, getJwtSecretKey());
     if (
       typeof payload.userId !== "string" ||
       typeof payload.email !== "string" ||

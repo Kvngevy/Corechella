@@ -29,7 +29,13 @@ function invalidateReadCache() {
 }
 
 const SUPER_ADMIN_EMAIL = process.env.SUPER_ADMIN_EMAIL ?? "admin@corechella.com";
-const SUPER_ADMIN_PASSWORD = process.env.SUPER_ADMIN_PASSWORD ?? "Corechella2026!";
+
+function getSuperAdminPassword(): string | null {
+  const password = process.env.SUPER_ADMIN_PASSWORD;
+  if (password) return password;
+  if (process.env.NODE_ENV === "production") return null;
+  return "dev-only-change-me";
+}
 
 let redis: Redis | null = null;
 
@@ -83,7 +89,10 @@ async function seedSuperAdmin(state: DbState): Promise<DbState> {
   const exists = state.users.some((u) => u.email === SUPER_ADMIN_EMAIL.toLowerCase());
   if (exists) return state;
 
-  const passwordHash = await bcrypt.hash(SUPER_ADMIN_PASSWORD, 12);
+  const password = getSuperAdminPassword();
+  if (!password) return state;
+
+  const passwordHash = await bcrypt.hash(password, 12);
   const superAdmin: DbUser = {
     id: "user-super-admin",
     name: "Super Admin",
