@@ -10,7 +10,14 @@ import {
 import type { DbState } from "./types";
 
 const QR_PREFIX = "CC";
-const QR_SECRET = process.env.QR_SECRET ?? "corechella-qr-secret";
+function getQrSecret(): string {
+  const secret = process.env.QR_SECRET;
+  if (secret) return secret;
+  if (process.env.NODE_ENV === "production") {
+    throw new Error("QR_SECRET must be set in production");
+  }
+  return "corechella-qr-dev-secret";
+}
 const QR_TOKEN_TTL_MS = 365 * 24 * 60 * 60 * 1000;
 
 export function generateTicketUuid() {
@@ -19,7 +26,7 @@ export function generateTicketUuid() {
 
 export function signQrPayload(orderId: string, ticketIndex: number, ticketUuid: string) {
   return crypto
-    .createHmac("sha256", QR_SECRET)
+    .createHmac("sha256", getQrSecret())
     .update(`${orderId}:${ticketIndex}:${ticketUuid}`)
     .digest("hex")
     .slice(0, 8)

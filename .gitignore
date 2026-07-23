@@ -1,0 +1,12 @@
+# Environment files (never commit real credentials)
+.env
+.env.*
+!.env*.example
+!.env.example
+
+# Runtime / local data
+.data/
+*.local
+
+# Next.js build cache (keep standalone output if intentionally versioned)
+.next/cache/

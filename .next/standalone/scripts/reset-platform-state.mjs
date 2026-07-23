@@ -42,7 +42,12 @@ const VIP_TICKET_PRICE = 25000;
 const uri = process.env.MONGODB_URI;
 const dbName = process.env.MONGODB_DB_NAME?.trim() || "corechella";
 const superAdminEmail = (process.env.SUPER_ADMIN_EMAIL ?? "admin@corechella.com").toLowerCase();
-const superAdminPassword = process.env.SUPER_ADMIN_PASSWORD ?? "Corechella2026!";
+const superAdminPassword = process.env.SUPER_ADMIN_PASSWORD;
+
+if (!superAdminPassword) {
+  console.error("SUPER_ADMIN_PASSWORD is required in .env.production.local or .env.local");
+  process.exit(1);
+}
 
 if (!uri) {
   console.error("MONGODB_URI is required in .env.local");
