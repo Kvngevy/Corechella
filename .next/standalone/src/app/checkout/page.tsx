@@ -120,10 +120,10 @@ function CheckoutContent() {
   }, []);
 
   useEffect(() => {
-    if (ready && cart.length === 0 && !activeOrderId) {
+    if (ready && cart.length === 0 && !activeOrderId && !processing) {
       router.replace("/tickets");
     }
-  }, [ready, cart, router, activeOrderId]);
+  }, [ready, cart, router, activeOrderId, processing]);
 
   useEffect(() => {
     if (!activeOrderId || !ready) return;
@@ -280,20 +280,23 @@ function CheckoutContent() {
       paymentMethod: "wavy",
       promoCode: promoApplied ? promoCode : undefined,
     });
-    setProcessing(false);
 
     if (!result.success) {
+      setProcessing(false);
       setError(result.error ?? "Payment failed");
       return;
     }
 
     if (result.checkoutUrl) {
+      if (result.orderId) setSuccessOrderId(result.orderId);
       if (result.order) {
         saveGuestOrderBundle(result.order, []);
       }
       window.location.href = result.checkoutUrl;
       return;
     }
+
+    setProcessing(false);
 
     const orderId = result.orderId ?? null;
     if (result.order) setSuccessOrder(result.order);

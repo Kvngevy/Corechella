@@ -412,4 +412,4 @@ export async function resetPlatformState(): Promise<DbState> {
   return fresh;
 }
 
-export { SERVICE_FEE, SUPER_ADMIN_EMAIL, SUPER_ADMIN_PASSWORD };
+export { SERVICE_FEE, SUPER_ADMIN_EMAIL, getSuperAdminPassword };
